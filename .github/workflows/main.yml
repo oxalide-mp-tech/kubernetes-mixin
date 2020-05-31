@@ -1,0 +1,24 @@
+name: Sync Fork 1
+
+on:
+  push:
+    branches:
+      - trigger-workflow
+  schedule:
+    - cron: '*/15 * * * *'
+
+jobs:
+  sync:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: TG908/fork-sync@v1.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          owner: kubernetes-monitoring
+          head: master # optional, default is master
+          # Branch to keep updated
+          base: master # optional, default is master
+          # Merge method to use
+          merge_method: fast-forward # optional, default is merge
